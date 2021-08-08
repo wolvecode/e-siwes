@@ -24,10 +24,10 @@ class StudentFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->name(),
+//            'name' => $this->faker->name(),
 //            'email' => $this->faker->unique()->safeEmail(),
             'name'=> 'Adedeji Stephen',
-            'email' => 'students@gmail.com',
+            'email' => 'student@gmail.com',
             'matric_no' =>'18D/47CS/00815',
             'bio' => $this->faker->sentence(),
             'git_url' => 'www.github.com/wolvecode',
