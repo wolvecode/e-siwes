@@ -2,37 +2,46 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+
+
 
 class User extends Authenticatable
 {
     use HasFactory, Notifiable;
 
     /**
-     * The attributes that are mass assignable.
+     * Model's auth guard.
      *
-     * @var array
+     * @var string
+     */
+    protected $guard =  'user';
+
+    /**
+     * Fields allowed for mass assignment.
+     *
+     * @var string[]
      */
     protected $fillable = [
         'name',
         'bio',
-        'session',
-        'supervisor_id',
-        'email',
-        'matric_no',
-        'location',
+        'role',
         'git_url',
         'linkedin_url',
-        'password',
+        'email',
+        'password'
+    ];
+
+    protected $casts = [
+        'role' => 'int',
     ];
 
     /**
-     * The attributes that should be hidden for arrays.
+     * Fields hidden from array serializing.
      *
-     * @var array
+     * @var string[]
      */
     protected $hidden = [
         'password',
@@ -40,11 +49,37 @@ class User extends Authenticatable
     ];
 
     /**
-     * The attributes that should be cast to native types.
+     * Determine if user is super admin.
      *
-     * @var array
+     * @return bool
      */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];
+    public function isSuperAdmin()
+    {
+        return $this->role === 1;
+    }
+
+    /**
+     * Determine if user is a normal admin.
+     *
+     * @return bool
+     */
+    public function isAdmin()
+    {
+        return $this->role === 2;
+    }
+
+    public function isGlobalAdmin()
+    {
+        return $this->role === 1 || $this->role === 2;
+    }
+
+    /**
+     * Determine if the user is a lecturer.
+     *
+     * @return bool
+     */
+    public function isLecturer()
+    {
+        return $this->role === 3;
+    }
 }
