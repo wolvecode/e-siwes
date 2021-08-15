@@ -15,6 +15,10 @@ class CreateAcceptancesTable extends Migration
     {
         Schema::create('acceptances', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('student_id')->constrained('students');
+            $table->foreignId('organization_id')->constrained('organizations');
+            $table->text('attachment')->nullable();
+            $table->text('description');
             $table->timestamps();
         });
     }
