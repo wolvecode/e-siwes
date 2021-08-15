@@ -28,7 +28,7 @@ class UserFactory extends Factory
              'bio' => $this->faker->sentence(),
              'git_url' => $this->faker->url(),
              'linkedin_url' => $this->faker->url(),
-             'role' => mt_rand(1, 3),
+             'role' => mt_rand(1,3),
              'password'=> '$2y$10$ZD97fRw7O/R2guXJJF0R2.YAzqX9LUviXjfXV4hCSnd602Cs6mPxW', // password
              'email_verified_at' => now(),
              'remember_token' => Str::random(10),

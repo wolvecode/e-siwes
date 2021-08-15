@@ -22,7 +22,9 @@ class ReportFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'attachment' => $this->faker->word(),
+            'student_id' => mt_rand(1,10),
+            'content' => $this->faker->sentence(5),
         ];
     }
 }
