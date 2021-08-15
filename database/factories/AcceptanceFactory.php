@@ -22,7 +22,10 @@ class AcceptanceFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'attachment' => $this->faker->word(),
+            'student_id' => mt_rand(1,10),
+            'organization_id' => mt_rand(1,10),
+            'description' => $this->faker->sentence(5),
         ];
     }
 }
