@@ -5,6 +5,7 @@
     "keywords": ["framework", "laravel"],
     "license": "MIT",
     "require": {
+        "ext-pdo_sqlite": "*",
         "php": "^7.3|^8.0",
         "box/spout": "^3.3",
         "fideloper/proxy": "^4.4",
