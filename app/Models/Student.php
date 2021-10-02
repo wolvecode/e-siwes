@@ -18,10 +18,12 @@ class Student extends  Authenticatable
     protected $fillable = [
         'name',
         'bio',
-        'session',
-        'supervisor_id',
+        'session_id',
+        'user_id',
         'email',
+        'assign',
         'matric_no',
+        'organization_id',
         'location',
         'git_url',
         'linkedin_url',
@@ -34,16 +36,42 @@ class Student extends  Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password',
         'remember_token',
     ];
 
-    /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
-     */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];
+    //User (supervisor)
+    public function supervisor()
+    {
+        return $this->belongsTo(User::class, 'user_id', 'id');
+    }
+
+    public function session()
+    {
+        return $this->belongsTo(Session::class);
+    }
+
+    public function organization()
+    {
+        return $this->belongsTo(Organization::class);
+    }
+
+    public function reports()
+    {
+        return $this->hasMany(Report::class);
+    }
+
+    public function acceptance()
+    {
+        return $this->hasOne(Acceptance::class);
+    }
+
+    public function organizationRequest()
+    {
+        return $this->belongsTo(Organization::class);
+    }
+
+    public function messages()
+    {
+        return $this->hasMany(Message::class, 'user_id', 'user_id');
+    }
 }

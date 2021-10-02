@@ -12,6 +12,7 @@ class DashboardController extends Controller
 
     public function index()
     {
+//       flashStatus('It does not work anymore, please try again.', 'Failed', 'error');
         return view('dashboard.dashboard');
     }
 }

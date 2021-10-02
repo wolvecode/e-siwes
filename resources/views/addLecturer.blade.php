@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
-@section('title', 'Log into your account')
+@section('title', 'Add supervisor')
 
 @section('content')
-    <x-form :name="'for Admin'" :type="'email'" :role="false" :action="'addAdmin'"/>
+    <x-form :name="'Lecturer'" :na="false" :type="'email'" :role="false" :action="'addLecturer'" :sessions="false"/>
 @endsection

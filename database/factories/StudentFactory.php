@@ -52,7 +52,7 @@ class StudentFactory extends Factory
             $supervisor_id = User::inRandomOrder()->where('role', 3)->first()->id;
 
 
-            $student->update(['organization_id' => $organization_id, 'user_id' => $supervisor_id]);
+            $student->update(['organization_id' => $organization_id, 'user_id' => $supervisor_id, 'assign' => true]);
 
             $student->reports()->createMany(Report::factory()->count(mt_rand(8, 12))->make()->toArray());
 

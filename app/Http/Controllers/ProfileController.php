@@ -14,8 +14,33 @@ class ProfileController extends Controller
 
     public function show()
     {
+        if(auth('user')){
+            $user = auth('user')->user();
+            return view('profile.profile', ['user' => $user]);
+        }
+        if(auth('student')){
+            $user = auth('student')->user();
+            return view('profile.profile',  ['user' => $user]);
+        }
+        return back();
+    }
 
-        return view('profile.profile');
+    public function update(Request $request)
+    {
+        $data = $request->validate([
+            'name',
+            'matric_no' => 'required|unique:students|max:255',
+            'session_id' => 'required',
+            'password' => 'required|confirmed',
+        ]);
+
+        $data['password'] = Hash::make($data['password']);
+
+        Student::create($data);
+
+        flashStatus('User successfully created', 'Success');
+
+        return back();
     }
 
 }

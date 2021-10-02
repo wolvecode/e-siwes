@@ -18,6 +18,11 @@ class CreateOrganizationsTable extends Migration
             $table->string('name');
             $table->string('state');
             $table->string('city');
+            $table->string('address');
+            $table->string('verified')->default(false);
+            $table->foreignId('request_id')->nullable()->constrained('students', 'id');
+            $table->string('placement_attachment')->nullable();
+            $table->string('placement_description')->nullable();
             $table->string('website')->nullable();
             $table->string('email')->nullable();
             $table->string('contact')->nullable();

@@ -27,6 +27,8 @@ class OrganizationFactory extends Factory
             'city' => $this->faker->city(),
             'website' => $this->faker->url(),
             'email' => $this->faker->email(),
+            'address' => $this->faker->address(),
+            'verified' => true,
             'contact' => $this->faker->phoneNumber(),
         ];
     }

@@ -27,6 +27,7 @@ class CreateStudentsTable extends Migration
             $table->string('role')->default('Student');
             $table->string('location')->nullable();
             $table->string('password');
+            $table->boolean('assign')->default(false);
             $table->rememberToken();
             $table->timestamps();
         });

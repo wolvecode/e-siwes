@@ -5,6 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Contracts\Auth\CanResetPassword;
+use \App\Notifications\ResetPasswordNotification as ResetPasswordNotification;
 
 
 
@@ -29,6 +31,7 @@ class User extends Authenticatable
         'bio',
         'role',
         'git_url',
+        'message_id',
         'linkedin_url',
         'email',
         'password'
@@ -47,6 +50,11 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
+
+    public function sendPasswordResetNotification($token)
+    {
+        $this->notify(new ResetPasswordNotification($token));
+    }
 
     /**
      * Determine if user is super admin.
@@ -81,5 +89,20 @@ class User extends Authenticatable
     public function isLecturer()
     {
         return $this->role === 3;
+    }
+
+    public function students()
+    {
+        return $this->hasMany(Student::class, 'user_id', 'id');
+    }
+
+    public function views()
+    {
+        return $this->hasManyThrough(Report::class, Student::class);
+    }
+
+    public function message()
+    {
+        return $this->hasMany(Message::class, 'id', 'message_id', 'id');
     }
 }

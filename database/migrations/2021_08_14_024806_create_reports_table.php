@@ -15,9 +15,10 @@ class CreateReportsTable extends Migration
     {
         Schema::create('reports', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('student_id')->nullable();
             $table->text('attachment')->nullable();
+            $table->boolean('view')->default(false);
             $table->text('content');
+            $table->foreignId('student_id')->nullable();
             $table->timestamps();
         });
     }

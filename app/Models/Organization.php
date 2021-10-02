@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Organisation extends Model
+class Organization extends Model
 {
     use HasFactory;
 
@@ -20,11 +20,21 @@ class Organisation extends Model
         'city',
         'website',
         'email',
-        'contact'
+        'request_id',
+        'address',
+        'contact',
+        'verified',
+        'placement_attachment',
+        'placement_description',
     ];
 
     public function students()
     {
         return $this->hasMany(Student::class);
+    }
+
+    public function studentRequest()
+    {
+        return $this->hasMany(Student::class, 'id', 'request_id', 'id');
     }
 }

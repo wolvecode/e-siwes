@@ -43,7 +43,11 @@ class LoginController extends Controller
             return redirect()->route('dashboard');
         }
 
-        return back()->with('status', 'Invalid login details');
+        flashStatus('Inavalid login details', 'Error', 'Danger'); 
+
+        return back();
+
+        // return back()->with('status', 'Invalid login details');
     }
 
 }

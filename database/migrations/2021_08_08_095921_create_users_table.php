@@ -22,6 +22,7 @@ class CreateUsersTable extends Migration
             $table->enum('role', [1,2,3]);
             $table->string('email')->unique();
             $table->string('password');
+            $table->foreignId('message_id')->nullable()->constrained('messages', 'id');
             $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();
             $table->timestamps();

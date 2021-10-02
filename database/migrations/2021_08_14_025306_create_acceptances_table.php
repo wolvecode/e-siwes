@@ -17,6 +17,7 @@ class CreateAcceptancesTable extends Migration
             $table->id();
             $table->foreignId('student_id')->constrained('students');
             $table->foreignId('organization_id')->constrained('organizations');
+            $table->string('verified')->default(false);
             $table->text('attachment')->nullable();
             $table->text('description');
             $table->timestamps();
