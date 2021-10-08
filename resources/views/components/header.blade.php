@@ -66,8 +66,8 @@
                     </div>
                 </div>
             </div>
-            <a class="dropdown-item" href="{{ route('profile.show') }}"><i class="bx bx-user-circle"></i>Profile</a>
-            <a class="dropdown-item" href=""><i class="bx bx-slider-alt"></i> Account Settings</a>
+            <a class="dropdown-item disabled" href="{{ route('profile.show') }}"><i class="bx bx-user-circle"></i>Profile</a>
+            <a class="dropdown-item disabled" href=""><i class="bx bx-slider-alt"></i> Account Settings</a>
             <form class="dropdown-item" action="{{route('logout')}}" method="post">
                 @csrf
                 <button type="submit" class="btn btn-outline-dark btn-block"> <i class="bx bx-log-out"></i> Sign Out</button>
