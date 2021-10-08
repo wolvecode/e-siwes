@@ -36,12 +36,6 @@
 <!--div-->
 <div class="col-xl-12">
     <div class="card mg-b-20">
-
-
-
-
-
-
         <div class="card-body">
             <div class="table-responsive">
                 <form action="<?php echo e(route('assignAll')); ?>" method="post" id="assignment">
@@ -61,10 +55,8 @@
 <?php endif; ?>
 <?php echo $__env->renderComponent(); ?>
 <?php endif; ?>
-                        
                         <div class="mb-2">
                             <a class="btn btn-primary model-effect"  data-effect="effect-flip-horizontal" data-toggle="modal"href="#modaldemo8">Assign All</a>
-
                         </div>
                     <?php endif; ?>
                     <table id="example" class="table key-buttons text-md-nowrap">

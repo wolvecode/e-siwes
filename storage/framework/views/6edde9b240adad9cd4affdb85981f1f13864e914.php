@@ -7,7 +7,7 @@
             <img src="<?php echo e(asset('assets/img/kwasu.png')); ?>" class="main-logo" alt="logo">
         </a>
         <a class="logo-icon mobile-logo icon-light active" href="/">
-            <img src="<?php echo e('assets/img/brand/favicon.pn'); ?>" class="logo-icon" alt="logo">
+            <img src="<?php echo e(asset('assets/img/kwasu.png')); ?>" class="logo-icon" alt="logo">
         </a>
     </div>
 
