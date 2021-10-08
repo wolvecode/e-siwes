@@ -64,7 +64,7 @@
                         
                         <div class="mb-2">
                             <a class="btn btn-primary model-effect"  data-effect="effect-flip-horizontal" data-toggle="modal"href="#modaldemo8">Assign All</a>
-                            <a class="  " href="<?php echo e(route('deleteStudent')); ?>">Delete All</a>
+
                         </div>
                     <?php endif; ?>
                     <table id="example" class="table key-buttons text-md-nowrap">

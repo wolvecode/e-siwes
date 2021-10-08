@@ -45,7 +45,7 @@
                         {{--                    Show button to delete and assign and trigger modal to display--}}
                         <div class="mb-2">
                             <a class="btn btn-primary model-effect"  data-effect="effect-flip-horizontal" data-toggle="modal"href="#modaldemo8">Assign All</a>
-                            <a class="  " href="{{ route('deleteStudent') }}">Delete All</a>
+{{--                            <a class="btn btn-danger" href="{{ route('deleteStudent') }}">Delete All</a>--}}
                         </div>
                     @endif
                     <table id="example" class="table key-buttons text-md-nowrap">
