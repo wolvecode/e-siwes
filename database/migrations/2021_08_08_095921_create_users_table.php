@@ -19,7 +19,7 @@ class CreateUsersTable extends Migration
             $table->string('bio')->nullable();
             $table->string('git_url')->nullable();
             $table->string('linkedin_url')->nullable();
-            $table->enum('role', [1,2,3]);
+            $table->enum('role', [1, 2, 3]); // where 1 = Super Admin, 2 = Admin, and 3 = Supervisor
             $table->string('email')->unique();
             $table->string('password');
             $table->foreignId('message_id')->nullable()->constrained('messages', 'id');

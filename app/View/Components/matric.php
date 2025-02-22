@@ -11,7 +11,7 @@ class matric extends Component
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(public string $type, public string $action, public bool $na)
     {
         //
     }

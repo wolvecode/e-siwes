@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Student;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class ProfileController extends Controller
 {
@@ -14,11 +16,11 @@ class ProfileController extends Controller
 
     public function show()
     {
-        if(auth('user')){
+        if (auth('user')) {
             $user = auth('user')->user();
             return view('profile.profile', ['user' => $user]);
         }
-        if(auth('student')){
+        if (auth('student')) {
             $user = auth('student')->user();
             return view('profile.profile',  ['user' => $user]);
         }
@@ -42,5 +44,4 @@ class ProfileController extends Controller
 
         return back();
     }
-
 }

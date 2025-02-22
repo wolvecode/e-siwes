@@ -1,10 +1,13 @@
-@props(['users' => $users, 'mail' => $mail, 'lecturers' => $lecturers, 'contact' => $contact])
+{{-- @props(['users' => $users, 'mail' => $mail, 'lecturers' => $lecturers, 'contact' => $contact]) --}}
+@props(['users', 'mail', 'lecturers', 'contact'])
+
 
 <!-- breadcrumb -->
 <div class="breadcrumb-header justify-content-between">
     <div class="my-auto">
         <div class="d-flex">
-            <h4 class="content-title mb-0 my-auto">Page/</h4><span class="text-muted mt-1 tx-13 ml-2 mb-0">/ Userlist</span>
+            <h4 class="content-title mb-0 my-auto">Page/</h4><span class="text-muted mt-1 tx-13 ml-2 mb-0">/
+                Userlist</span>
         </div>
     </div>
     <div class="d-flex my-xl-auto right-content">
@@ -19,7 +22,7 @@
         </div>
         <div class="mb-3 mb-xl-0">
             <div class="btn-group dropdown">
-                <button type="button" class="btn btn-primary">{{now()->format("F j, Y")}}</button>
+                <button type="button" class="btn btn-primary">{{ now()->format('F j, Y') }}</button>
             </div>
         </div>
     </div>
@@ -31,16 +34,17 @@
 
         <div class="card-body">
             <div class="table-responsive">
-                <form action="{{ route('assignAll')}}" method="post" id="assignment">
+                <form action="{{ route('assignAll') }}" method="post" id="assignment">
                     @csrf
                     @method('PATCH')
-                    @if($lecturers)
+                    @if ($lecturers)
                         <input type="hidden" name="students_id" id="students_id">
-                        <x-modal-table :lecturers="$lecturers"/>
-                        {{--                    Show button to delete and assign and trigger modal to display--}}
+                        <x-modal-table :lecturers="$lecturers" />
+                        {{--                    Show button to delete and assign and trigger modal to display --}}
                         <div class="mb-2">
-                            <a class="btn btn-primary model-effect"  data-effect="effect-flip-horizontal" data-toggle="modal"href="#modaldemo8">Assign All</a>
-{{--                            <a class="btn btn-danger" href="{{ route('deleteStudent') }}">Delete All</a>--}}
+                            <a class="btn btn-primary model-effect" data-effect="effect-flip-horizontal"
+                                data-toggle="modal"href="#modaldemo8">Assign All</a>
+                            {{--                            <a class="btn btn-danger" href="{{ route('deleteStudent') }}">Delete All</a> --}}
                         </div>
                     @endif
                     <table id="example" class="table key-buttons text-md-nowrap">
@@ -48,14 +52,14 @@
                             <tr>
                                 <th class="border-bottom-0"><span>Mark</span></th>
                                 <th class="border-bottom-0"><span>Name</span></th>
-                                @if($mail)
+                                @if ($mail)
                                     <th class="border-bottom-0"><span>Email</span></th>
                                 @endif
-                                @if($contact)
+                                @if ($contact)
                                     <th class="border-bottom-0"><span>Contact</span></th>
                                 @endif
 
-                                @if(!$mail)
+                                @if (!$mail)
                                     <th class="border-bottom-0"><span>Matric_No</span></th>
                                     <th class="border-bottom-0"><span>Supervisor Name</span></th>
                                 @endif
@@ -64,25 +68,27 @@
                         </thead>
                         <tbody>
                             @foreach ($users as $user)
-                                <tr id="tr_{{$user->id}}">
+                                <tr id="tr_{{ $user->id }}">
                                     <td>
                                         <div class="checkbox">
                                             <div class="custom-checkbox custom-control">
-                                                <input type="checkbox" value="{{$user->id}}" name="user_id[]"  class="custom-control-input" id="{{ $user->id }}"/>
-                                                <label for="{{$user->id}}" class="custom-control-label mt-1"></label>
+                                                <input type="checkbox" value="{{ $user->id }}" name="user_id[]"
+                                                    class="custom-control-input" id="{{ $user->id }}" />
+                                                <label for="{{ $user->id }}"
+                                                    class="custom-control-label mt-1"></label>
                                             </div>
                                         </div>
                                     </td>
                                     <td>
-                                       {{ $user->name }}
+                                        {{ $user->name }}
                                     </td>
-                                    @if($mail)
+                                    @if ($mail)
                                         <td>{{ $user->email }}</td>
                                     @endif
-                                    @if($contact)
+                                    @if ($contact)
                                         <td>{{ $user->contact }}</td>
                                     @endif
-                                    @if(!$mail)
+                                    @if (!$mail)
                                         <td>{{ $user->matric_no }}</td>
                                         <td> {{ $user->supervisor ? $user->supervisor->name : '--' }} </td>
                                     @endif
@@ -99,16 +105,15 @@
 <!--/div-->
 @push('css')
     <!-- Internal Data table css -->
-    <link href="{{ asset('assets/plugins/datatable/css/dataTables.bootstrap4.min.css') }}" rel="stylesheet"/>
-    <link href="{{ asset('assets/plugins/datatable/css/buttons.bootstrap4.min.css') }}" rel="stylesheet"/>
-    <link href="{{ asset('assets/plugins/datatable/css/responsive.bootstrap4.min.css') }}" rel="stylesheet"/>
-{{--    <link href="../../assets/plugins/datatable/css/jquery.dataTables.min.css" rel="stylesheet"/>--}}
-    <link href="{{ asset('assets/plugins/datatable/css/responsive.dataTables.min.css') }}" rel="stylesheet"/>
-    <link href="{{ asset('assets/plugins/select2/css/select2.min.css') }}" rel="stylesheet"/>
+    <link href="{{ asset('assets/plugins/datatable/css/dataTables.bootstrap4.min.css') }}" rel="stylesheet" />
+    <link href="{{ asset('assets/plugins/datatable/css/buttons.bootstrap4.min.css') }}" rel="stylesheet" />
+    <link href="{{ asset('assets/plugins/datatable/css/responsive.bootstrap4.min.css') }}" rel="stylesheet" />
+    {{--    <link href="../../assets/plugins/datatable/css/jquery.dataTables.min.css" rel="stylesheet"/> --}}
+    <link href="{{ asset('assets/plugins/datatable/css/responsive.dataTables.min.css') }}" rel="stylesheet" />
+    <link href="{{ asset('assets/plugins/select2/css/select2.min.css') }}" rel="stylesheet" />
 @endpush
 
 @push('scripts')
-
     <!-- Internal Data tables -->
     <script src="{{ asset('assets/plugins/datatable/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('assets/plugins/datatable/js/dataTables.dataTables.min.js') }}"></script>
@@ -116,7 +121,7 @@
     <script src="{{ asset('assets/plugins/datatable/js/responsive.dataTables.min.js') }}"></script>
     <script src="{{ asset('assets/plugins/datatable/js/jquery.dataTables.js') }}"></script>
     <script src="{{ asset('assets/plugins/datatable/js/dataTables.bootstrap4.js') }}"></script>
-    <script src="{{asset('assets/plugins/datatable/js/dataTables.buttons.min.js')}}"></script>
+    <script src="{{ asset('assets/plugins/datatable/js/dataTables.buttons.min.js') }}"></script>
     <script src="{{ asset('assets/plugins/datatable/js/buttons.bootstrap4.min.js') }}"></script>
     <script src="{{ asset('assets/plugins/datatable/js/jszip.min.js') }}"></script>
     <script src="{{ asset('assets/plugins/datatable/js/pdfmake.min.js') }}"></script>
@@ -135,7 +140,7 @@
 
         document.querySelectorAll("input[type='checkbox']").forEach((elm) => elm.addEventListener('change', function() {
             const id = this.getAttribute('id');
-            if (this.checked && ! students.includes(id)) {
+            if (this.checked && !students.includes(id)) {
                 students.push(id)
             } else {
                 students = students.filter((i) => i !== id)

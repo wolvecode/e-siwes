@@ -41,7 +41,7 @@ class UserController extends Controller
     {
 
         $data = $request->validate([
-            'name'=> 'required|max:255',
+            'name' => 'required|max:255',
             'email' => 'required|unique:users|email|max:255',
             'password' => 'required|confirmed',
         ]);
@@ -59,7 +59,7 @@ class UserController extends Controller
     public function create(Request $request)
     {
         $data = $request->validate([
-            'name'=> 'required|max:255',
+            'name' => 'required|max:255',
             'role' => 'required',
             'email' => 'required|unique:users|email|max:255',
             'password' => 'required|confirmed',
@@ -89,7 +89,7 @@ class UserController extends Controller
     public function edit(User $user)
     {
         $data = $request->validate([
-            'name'=> 'required|max:255',
+            'name' => 'required|max:255',
             'role' => 'required',
             'email' => 'required|unique:users|email|max:255',
             'password' => 'required|confirmed',

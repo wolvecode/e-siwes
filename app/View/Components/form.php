@@ -11,7 +11,7 @@ class form extends Component
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(public string $name, public string $type, public string $action, public $sessions,  public bool $na,  public bool $role)
     {
         //
     }

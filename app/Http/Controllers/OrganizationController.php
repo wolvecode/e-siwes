@@ -6,6 +6,7 @@ use App\Mail\DeclineOrgnization;
 use App\Mail\VerifyOrganization;
 use App\Models\Organization;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 
 class OrganizationController extends Controller
@@ -62,16 +63,24 @@ class OrganizationController extends Controller
 
         $student_id = auth('student')->user()->id;
 
-        if($request->hasFile('placement_attachment')) {
+        if ($request->hasFile('placement_attachment')) {
 
             $request->file('placement_attachment')->storePublicly('public');
 
             $fileName = $request->file('placement_attachment')->hashName('storage');
 
-            Organization::create(['request_id' => $student_id, 'name'=> $request->name, 'state' => $request->state,
-                'city' => $request->city, 'email' => $request->email, 'contact' => $request->contact,
-                'address' => $request->address, 'placement_description' => $request->placement_description,
-                'website' => $request->website ,'placement_attachment' => $fileName]);
+            Organization::create([
+                'request_id' => $student_id,
+                'name' => $request->name,
+                'state' => $request->state,
+                'city' => $request->city,
+                'email' => $request->email,
+                'contact' => $request->contact,
+                'address' => $request->address,
+                'placement_description' => $request->placement_description,
+                'website' => $request->website,
+                'placement_attachment' => $fileName
+            ]);
 
             flashStatus('Adding of Organization will be under review, check back', 'Success');
         }
@@ -81,7 +90,7 @@ class OrganizationController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'name'=> 'required',
+            'name' => 'required',
             'state' => 'required',
             'city' => 'required',
             'email' => 'required',
@@ -93,9 +102,15 @@ class OrganizationController extends Controller
         $data['verified'] =  true;
 
         Organization::create(
-            [ 'name' => $request->name, 'state' => $request->state, 'city' => $request->city,
-                'email' => $request->email, 'contact' => $request->contact, 'address' => $request->address,
-                'website' => $request->website, 'verified' => true
+            [
+                'name' => $request->name,
+                'state' => $request->state,
+                'city' => $request->city,
+                'email' => $request->email,
+                'contact' => $request->contact,
+                'address' => $request->address,
+                'website' => $request->website,
+                'verified' => true
             ]
         );
 
@@ -123,7 +138,12 @@ class OrganizationController extends Controller
 
         Organization::where('id', $organization->id)->update(['verified' => true]);
 
-        Mail::to($data->email)->send(new VerifyOrganization($data));
+        try {
+            Mail::to($data->email)->send(new VerifyOrganization($data));
+        } catch (\Exception $e) {
+            Log::error('Email sending failed: ' . $e->getMessage());
+            flashStatus("Email sending failed: '$data->email'", 'Error');
+        }
 
         flashStatus('Organization is successfully verified', 'Success');
         return back();
@@ -131,7 +151,7 @@ class OrganizationController extends Controller
 
     public function show(Organisation $organization)
     {
-       //
+        //
     }
 
     /**
@@ -160,9 +180,16 @@ class OrganizationController extends Controller
     {
         $student = Organization::find($organization->id)->studentRequest;
 
+        $data = $student[0];
+
         Organization::where('id', $organization->id)->delete();
 
-        Mail::to($data->email)->send(new DeclineOrgnization($data));
+        try {
+            Mail::to($data->email)->send(new DeclineOrgnization($data));
+        } catch (\Exception $e) {
+            Log::error('Email sending failed: ' . $e->getMessage());
+            flashStatus("Email sending failed: '$data->email'", 'Error');
+        }
 
         flashStatus('Organization is declined and an email have been sent to the user', 'Success');
         return back();

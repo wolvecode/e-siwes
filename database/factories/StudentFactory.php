@@ -32,7 +32,7 @@ class StudentFactory extends Factory
             'name' => $this->faker->name,
             'email' => $this->faker->email,
             'matric_no' => mt_rand(815, 830),
-            'user_id' => 1,
+            'user_id' => 1, // Student
             'organization_id' => 1,
             'session_id' => 1,
             'bio' => $this->faker->sentence(),

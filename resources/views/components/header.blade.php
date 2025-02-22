@@ -1,4 +1,4 @@
-@props(['user' => $user])
+@props(['user' => $user ?? ''])
 
 <div class="nav nav-item  navbar-nav-right ml-auto">
     <div class="nav-link" id="bs-example-navbar-collapse-1">
@@ -61,8 +61,8 @@
                 <div class="d-flex wd-100p">
                     <div class="main-img-user"><img alt="" src="{{ asset('assets/img/faces/6.jpg') }}" class=""></div>
                     <div class="ml-3 my-auto">
-                        <h6> {{ $user->user()->name }} </h6>
-                        <span>{{$user->user()->role == '3'  ? 'Supervisor' : 'Admin'}} Member</span>
+                        <h6> {{ $user ?? ''->user()->name }} </h6>
+                        <span>{{$user ?? ''->user()->role == '3'  ? 'Supervisor' : 'Admin'}} Member</span>
                     </div>
                 </div>
             </div>

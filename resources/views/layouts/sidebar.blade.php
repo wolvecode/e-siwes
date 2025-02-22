@@ -13,7 +13,8 @@
 {{--    image logo close--}}
     <div class="main-sidemenu">
         @auth('user')
-            <x-username :user="@auth('user')" />
+            <p class="">  {{ auth('user')->user()->name }} </p>
+            {{-- <x-username :user="@auth('user')" /> --}}
         @endauth
         @auth('student')
             <x-username :user="@auth('student')" />

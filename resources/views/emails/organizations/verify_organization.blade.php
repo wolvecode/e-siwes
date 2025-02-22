@@ -1,18 +1,28 @@
-@component('mail::message')
+{{-- @component('mail::message') --}}
 
-Hi {{ $data->name }},<br>
-this is an email to verify that the
-organization you added have been
-successfully added.<br>
+<div
+    style="background-color: #f7f7f7; padding: 20px; border-radius: 8px; width: 100%; max-width: 600px; margin: 0 auto;">
+    <h1 style="color: #28a745; text-align: center;">Organization Added Successfully!</h1>
 
-You can proceed to upload your acceptance
-letter.
+    <p style="font-size: 16px; line-height: 1.6;">
+        Hi {{ $data->name }},<br><br>
+        We're happy to inform you that the organization you added has been successfully approved!
+    </p>
 
-click the below button to login
-@component('mail::button', ['url' => 'http://localhost:8000'])
-Button Text
-@endcomponent
+    <p style="font-size: 16px; line-height: 1.6;">
+        You can now proceed to upload your acceptance letter to complete your application.
+    </p>
 
-Thanks,<br>
-{{ config('app.name') }}
-@endcomponent
+    <div style="text-align: center; margin-top: 30px;">
+        @component('mail::button', ['url' => 'http://localhost:8000', 'color' => 'success'])
+            Upload Acceptance Letter
+        @endcomponent
+    </div>
+
+    <p style="font-size: 14px; color: #888; margin-top: 30px; text-align: center;">
+        Thank you,<br>
+        {{ config('app.name') }}
+    </p>
+</div>
+
+{{-- @endcomponent --}}

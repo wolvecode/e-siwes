@@ -35,7 +35,7 @@ Route::get('/profile', [ProfileController::class, 'show'])
 Route::post('/profile/{user}', [ProfileController::class, 'update'])
     ->name('updateProfile');
 
-Route::delete('/profile/{user}', [ 'delete'])
+Route::delete('/profile/{user}', ['delete'])
     ->name('post.delete');
 
 Route::get('/add/user', [UserController::class, 'index'])
@@ -141,7 +141,5 @@ Route::post('/reset-password', [ResetPasswordController::class, 'store'])
     ->name('password.update');
 
 //Display image to user
-Route::get('/{filename}', [ReportController::class , 'displayImage'])
+Route::get('/{filename}', [ReportController::class, 'displayImage'])
     ->name('displayImage');
-
-

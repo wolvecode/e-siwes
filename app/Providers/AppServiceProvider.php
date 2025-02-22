@@ -6,6 +6,7 @@ use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\Blade;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -27,7 +28,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         /////
-//        $this->registerPolicies();
+        //        $this->registerPolicies();
 
         ResetPassword::createUrlUsing(function ($user, string $token) {
             return $token;
@@ -35,9 +36,11 @@ class AppServiceProvider extends ServiceProvider
 
         ////
         View::composer('*', function ($view) {
-           if (Auth::guard('student')->check()) {
-               $view->with('messages', Auth::guard('student')->user()->messages);
-           }
+            if (Auth::guard('student')->check()) {
+                $view->with('messages', Auth::guard('student')->user()->messages);
+            }
         });
+
+        Blade::component('components.list-user', 'listUser');
     }
 }

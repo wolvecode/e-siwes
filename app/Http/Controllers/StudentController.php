@@ -48,7 +48,7 @@ class StudentController extends Controller
     public function create()
     {
         $sessions = Session::all();
-        return view('addStudent', [ 'sessions' => $sessions ]);
+        return view('addStudent', ['sessions' => $sessions]);
     }
 
     public function assignAll(Request $request)
@@ -69,7 +69,7 @@ class StudentController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'name'=> 'required|max:255',
+            'name' => 'required|max:255',
             'email' => 'required|unique:students|max:255',
             'matric_no' => 'required|unique:students|max:255',
             'session_id' => 'required',
@@ -91,7 +91,7 @@ class StudentController extends Controller
             'attachment' => 'file|required|max:2048',
         ]);
 
-        if($request->hasFile('attachment')) {
+        if ($request->hasFile('attachment')) {
             $request->file('attachment')->storePublicly('public');
 
             $fileName = $request->file('attachment')->hashName('storage');
@@ -177,7 +177,7 @@ class StudentController extends Controller
             'organization_id' => 'required'
         ]);
 
-        if($request->hasFile('attachment')) {
+        if ($request->hasFile('attachment')) {
 
             $request->file('attachment')->storePublicly('public/acceptance');
 
@@ -187,8 +187,10 @@ class StudentController extends Controller
 
             Acceptance::create(
                 [
-                'student_id' => $student_id, 'organization_id' => $new['organization_id'],
-                'description' => $new['description'],'attachment' => $fileName,
+                    'student_id' => $student_id,
+                    'organization_id' => $new['organization_id'],
+                    'description' => $new['description'],
+                    'attachment' => $fileName,
                 ]
             );
 
@@ -203,10 +205,10 @@ class StudentController extends Controller
     }
 
 
-    public function edit(Student $student)
+    public function edit(Student $student, Request $request)
     {
         $data = $request->validate([
-            'name'=> 'required|max:255',
+            'name' => 'required|max:255',
             'matric_no' => 'required|unique:students|max:255',
             'session_id' => 'required',
             'password' => 'required|confirmed',
